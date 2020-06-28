@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Inicio de sesión{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+{% block body %}
+    <form method="POST" id="login_form">
+        <div id="login_container">
+            {{ form.hidden_tag() }}
+            {{ form.username.label }} {{ form.username(class='input-field', id='username_login') }}
+            {{ form.password.label() }} {{ form.password(class='input-field', id='password_login') }}
+            {{ form.submit(class='btn', id='submit_button') }}
+        </div>
+    </form>
+{% endblock %}

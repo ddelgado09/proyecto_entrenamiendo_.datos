@@ -1,0 +1,14 @@
+{% block navbar %}
+    <ul class="navbar">
+        <li class="navbar-header">
+            Entrenamiento Paz
+        </li>
+        {% if nombre %}
+            <li class="navbar-right" style="float: right;">
+                <a href="#" class="logout">
+                    Cerrar sesión
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}

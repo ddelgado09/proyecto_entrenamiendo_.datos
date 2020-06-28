@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %} - Entrenamiento Paz</title>
+    {% block head %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <span class="close" data-dismiss="alert" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% block body %}{% endblock %}
+</body>
+</html>

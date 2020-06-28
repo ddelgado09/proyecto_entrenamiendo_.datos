@@ -1,0 +1,32 @@
+#login_form {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+#login_container {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    padding: 10px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+#submit_button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
