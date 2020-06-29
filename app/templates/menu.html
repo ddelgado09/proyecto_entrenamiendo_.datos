@@ -4,5 +4,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
 {% endblock %}
 {% block body %}
-    <h1>Bienvenido {{ nombre }}!</h1>
+    <h2>Bienvenido {{ nombre }}!</h2>
+    <ul id="main-menu">
+        <li class="menu-element">
+            <a href="{{ url_for('.cargar') }}" class="menu-link">
+                Cargar Datos
+            </a>
+        </li>
+        <li class="menu-element">
+            <a href="{{ url_for('.ver') }}" class="menu-link">
+                Ver Datos
+            </a>
+        </li>
+    </ul>
 {% endblock %}

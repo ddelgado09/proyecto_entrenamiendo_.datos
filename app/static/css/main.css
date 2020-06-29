@@ -5,6 +5,7 @@ body {
 .container {
     margin-left: 25%;
     margin-right: 25%;
+    padding: 20px;
 }
 
 .navbar {

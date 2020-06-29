@@ -1,11 +1,13 @@
 {% block navbar %}
     <ul class="navbar">
         <li class="navbar-header">
-            Entrenamiento Paz
+            <a href="{{ url_for('main.index') }}">
+                Entrenamiento Paz
+            </a>
         </li>
-        {% if nombre %}
+        {% if current_user.is_authenticated %}
             <li class="navbar-right" style="float: right;">
-                <a href="#" class="logout">
+                <a href="{{ url_for('auth.login') }}" class="logout">
                     Cerrar sesión
                 </a>
             </li>

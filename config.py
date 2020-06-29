@@ -22,18 +22,21 @@ class Config:
         pass
 
 class DevelopmentConfig(Config):
+    cnf = Config()
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI') or \
-        'postgresql://' + Config.USER + ':' + Config.PASSWORD + '@' + Config.HOST + '/' + Config.DB
+        'postgresql://' + cnf.USER + ':' + cnf.PASSWORD + '@' + cnf.HOST + '/' + cnf.DB
 
 class TestingConfig(Config):
+    cnf = Config()
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI') or \
-        'postgresql://root:12345@localhost/bdf_pruebas'
+        'postgresql://' + cnf.USER + ':' + cnf.PASSWORD + '@' + cnf.HOST + '/' + cnf.DB
 
 class ProductionConfig(Config):
+    cnf = Config()
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI') or \
-        'postgresql://root:12345@localhost/bdf'
+        'postgresql://' + cnf.USER + ':' + cnf.PASSWORD + '@' + cnf.HOST + '/' + cnf.DB
 
 config = {
     'development': DevelopmentConfig,

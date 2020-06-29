@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Cargar Datos{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cargar.css') }}">
+{% endblock %}
+{% block body %}
+    <form id="cargar-form" method="POST" enctype="multipart/form-data">
+        <div class="container">
+            {{ form.hidden_tag() }}
+            {{ form.archivo.label(id='cargar-label') }}
+            {{ form.archivo() }}
+            {{ form.submit() }}
+        </div>
+        <div class="container">
+            {% if result %}
+                {% for val in result %}
+                    {{ val }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}

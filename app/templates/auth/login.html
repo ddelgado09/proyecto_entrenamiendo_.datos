@@ -9,6 +9,7 @@
             {{ form.hidden_tag() }}
             {{ form.username.label }} {{ form.username(class='input-field', id='username_login') }}
             {{ form.password.label() }} {{ form.password(class='input-field', id='password_login') }}
+            {{ form.remember_me.label() }}{{ form.remember_me() }}
             {{ form.submit(class='btn', id='submit_button') }}
         </div>
     </form>

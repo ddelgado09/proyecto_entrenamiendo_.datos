@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Tablas Datos{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ver.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container-table">
+        <div class="tabs">
+            <button class="tablinks" id="opiniones" value="opiniones" type="button">Opiniones</button>
+            <button class="tablinks" id="evaluador" value="evaluador" type="button">Evaluador</button>
+            <button class="tablinks" id="procesamientos" value="procesamientos" type="button">Procesamientos</button>
+            <button class="tablinks" id="students" value="students" type="button">Estudiantes</button>
+        </div>
+        <div class="table-content">
+            <table id="table-opiniones" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Estudiante
+                        </th>
+                        <th>
+                            Opinión
+                        </th>
+                        <th>
+                            Edad
+                        </th>
+                        <th>
+                            Semestre
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                        <tr>
+                            <td>
+                                {{ row.idopinion }}
+                            </td>
+                            <td>
+                                {{ row.nombres }}
+                            </td>
+                            <td>
+                                {% if row.opinion|length > 25 %}
+                                {{ row.opinion[:25] }}...
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ row.edad }}
+                            </td>
+                            <td>
+                                {{ row.semester }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <table class="table-data"></table>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    <script type="text/javascript">
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ver.js') }}"></script>
+{% endblock %}
