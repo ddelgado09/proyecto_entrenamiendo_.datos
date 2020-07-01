@@ -25,6 +25,8 @@ class Evaluador(db.Model):
     clasifiopi = db.Column(db.String(255))
     clasifiopi1 = db.Column(db.String(255))
     idevaluacion = db.Column(db.Integer, primary_key=True, nullable=False)
+    opinion = db.relationship('Opinion', backref='evaluador')
+    usuario = db.relationship('Usuario', backref='evaluador')
 
     def __repr__(self):
         return '<Evaluador %r %r $r>' % (self.idevaluador, self.clasifiopi, self.clasifiopi1)
@@ -42,6 +44,10 @@ class Opinion(db.Model):
 
     def __repr__(self):
         return '<Opinion %r %r %r %r %r>' % (self.student, self.opinion, self.edad, self.semester, self.nombres)
+
+    def as_dict(self):
+        return { col.name: getattr(self, col.name) for col in self.__table__.columns}
+
     
 class Procesamientos(db.Model):
     __tablename__ = 'procesamientos'
@@ -66,7 +72,7 @@ class Students(db.Model):
     genero = db.Column(db.Text)
     colegio = db.Column(db.Text)
     tipocolegio = db.Column(db.Text)
-    ciudadcolegio = db.Column(db.Text)
+    cuidadcolegio = db.Column(db.Text)
     estado = db.Column(db.Text)
     especialidad = db.Column(db.Text)
     estadocivil = db.Column(db.Text)

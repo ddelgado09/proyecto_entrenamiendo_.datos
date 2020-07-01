@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
+    <div class="overlay">
+        <div class="loader"></div>
+    </div>
     {% include "navbar.html" %}
     <div class="container">
         {% for message in get_flashed_messages() %}
@@ -17,6 +20,7 @@
     </div>
     {% block body %}{% endblock %}
     <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% block footer %}{% endblock %}
 </body>
 </html>

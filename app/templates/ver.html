@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}Tablas Datos{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ver.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
 {% endblock %}
 {% block body %}
-    <div class="container-table">
+    <div class="container-table" style="overflow-x: auto;">
         <div class="tabs">
-            <button class="tablinks" id="opiniones" value="opiniones" type="button">Opiniones</button>
-            <button class="tablinks" id="evaluador" value="evaluador" type="button">Evaluador</button>
-            <button class="tablinks" id="procesamientos" value="procesamientos" type="button">Procesamientos</button>
-            <button class="tablinks" id="students" value="students" type="button">Estudiantes</button>
+            <button type="button" class="tablinks" id="opiniones" value="opiniones">Opiniones</button>
+            <button type="button" class="tablinks" id="evaluador" value="evaluador">Evaluador</button>
+            <button type="button" class="tablinks" id="procesamientos" value="procesamientos">Procesamientos</button>
+            <button type="button" class="tablinks" id="students" value="students">Estudiantes</button>
         </div>
+        <input type="text" name="search_value" id="search_value" placeholder="Búsqueda..">
         <div class="table-content">
             <table id="table-opiniones" class="table">
                 <thead>
@@ -34,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for row in data %}
+                    {% for row in opiniones %}
                         <tr>
                             <td>
                                 {{ row.idopinion }}
@@ -43,12 +44,14 @@
                                 {{ row.nombres }}
                             </td>
                             <td>
-                                {% if row.opinion|length > 25 %}
-                                {{ row.opinion[:25] }}...
-                                {% endif %}
+                                {{ row.opinion }}
                             </td>
                             <td>
+                                {% if row.edad %}
                                 {{ row.edad }}
+                                {% else %}
+                                -
+                                {% endif %}
                             </td>
                             <td>
                                 {{ row.semester }}
@@ -57,15 +60,505 @@
                     {% endfor %}
                 </tbody>
             </table>
-
-            <table class="table-data"></table>
+            <table id="table-students" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Semestre
+                        </th>
+                        <th>
+                            Programa
+                        </th>
+                        <th>
+                            Tipo Documento
+                        </th>
+                        <th>
+                            Núm. Documento
+                        </th>
+                        <th>
+                            Código
+                        </th>
+                        <th>
+                            Código Inscripción
+                        </th>
+                        <th>
+                            Nombre Estudiante
+                        </th>
+                        <th>
+                            Género
+                        </th>
+                        <th>
+                            Colegio
+                        </th>
+                        <th>
+                            Tipo Colegio
+                        </th>
+                        <th>
+                            Ciudad Colegio
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                        <th>
+                            Especialidad
+                        </th>
+                        <th>
+                            Estado Civil
+                        </th>
+                        <th>
+                            Tarjeta Militar
+                        </th>
+                        <th>
+                            País de Nacimiento
+                        </th>
+                        <th>
+                            Departamento de Nacimiento
+                        </th>
+                        <th>
+                            Ciudad de Nacimiento
+                        </th>
+                        <th>
+                            Fecha de Nacimiento
+                        </th>
+                        <th>
+                            País de Residencia
+                        </th>
+                        <th>
+                            Departamento de Residencia
+                        </th>
+                        <th>
+                            Ciudad de Residencia
+                        </th>
+                        <th>
+                            Número de Hijos
+                        </th>
+                        <th>
+                            Tipo de Vivienda
+                        </th>
+                        <th>
+                            Número de Personas a Cargo
+                        </th>
+                        <th>
+                            Estrato
+                        </th>
+                        <th>
+                            Sisben
+                        </th>
+                        <th>
+                            De Usa Casa
+                        </th>
+                        <th>
+                            Actividad Económica
+                        </th>
+                        <th>
+                            Rango Salarial
+                        </th>
+                        <th>
+                            Financia Matrícula
+                        </th>
+                        <th>
+                            Grupo Discapacidad
+                        </th>
+                        <th>
+                            Discapacidad
+                        </th>
+                        <th>
+                            Resguardo Indígena
+                        </th>
+                        <th>
+                            Grupo Étnico
+                        </th>
+                        <th>
+                            Víctima
+                        </th>
+                        <th>
+                            Desplazado
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in students %}
+                        <tr>
+                            <td>
+                                {% if row.semestre %}
+                                {{ row.semestre }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.programa %}
+                                {{ row.programa }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.tdocumento %}
+                                {{ row.tdocumento }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.numero %}
+                                {{ row.numero }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.codigo %}
+                                {{ row.codigo }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.tipocolegio %}
+                                {{ row.tipocolegio }}
+                                {% else %}
+                                -
+                                {% endif %}
+                                <td>
+                                {% if row.semestre %}
+                                {{ row.semestre }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            </td>
+                            <td>
+                                {% if row.ciudadcolegio %}
+                                {{ row.ciudadcolegio }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.estado %}
+                                {{ row.estado }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.especialidad %}
+                                {{ row.especialidad }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.estadocivil %}
+                                {{ row.estadocivil }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.tarjetamilitar %}
+                                {{ row.tarjetamilitar }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.paisnacimiento %}
+                                {{ row.paisnacimiento }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.deptonacimiento %}
+                                {{ row.deptonacimiento }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.ciudadnacimiento %}
+                                {{ row.ciudadnacimiento }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.fechanacimiento %}
+                                {{ row.fechanacimiento }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.paisrecidencia %}
+                                {{ row.paisrecidencia }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.deptorecidencia %}
+                                {{ row.deptorecidencia }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.ciudadresidencia %}
+                                {{ row.ciudadresidencia }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.numhijos %}
+                                {{ row.numhijos }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.tipovovienda %}
+                                {{ row.tipovovienda }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.numpersonasacargo %}
+                                {{ row.numpersonasacargo }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.estrato %}
+                                {{ row.estrato }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.sisben %}
+                                {{ row.sisben }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.deusacasa %}
+                                {{ row.deusacasa }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.actividadeconomica %}
+                                {{ row.actividadeconomica }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.rangosalarial %}
+                                {{ row.rangosalarial }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.financiamatricula %}
+                                {{ row.financiamatricula }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.grupodiscapacidad %}
+                                {{ row.grupodiscapacidad }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.discapacidad %}
+                                {{ row.discapacidad }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.resguardoindigena %}
+                                {{ row.resguardoindigena }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.grupoetnico %}
+                                {{ row.grupoetnico }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.victima %}
+                                {{ row.victima }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.desplazado %}
+                                {{ row.desplazado }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table id="table-procesamientos" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Plagio
+                        </th>
+                        <th>
+                            Largo
+                        </th>
+                        <th>
+                            Opinión
+                        </th>
+                        <th>
+                            URL
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in procesamientos %}
+                        <tr>
+                            <td>
+                                {% if row.id_procesamiento %}
+                                {{ row.id_procesamiento }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.plagio %}
+                                {{ row.plagio }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.largo %}
+                                {{ row.largo }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.idopinion %}
+                                {{ row.opinion.opinion }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.url %}
+                                {{ row.url }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table id="table-evaluador" class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Opinión
+                        </th>
+                        <th>
+                            Clasifiopi
+                        </th>
+                        <th>
+                            Clasifiopi1
+                        </th>
+                        <th>
+                            Usuario
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in evaluador %}
+                        <tr>
+                            <td>
+                                {% if row.idevaluacion %}
+                                {{ row.idevaluacion }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.idopinion %}
+                                {{ row.opinion.opinion }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.clasifiopi %}
+                                {{ row.clasifiopi }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.clasifiopi1 %}
+                                {{ row.clasifiopi1 }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if row.idevaluador %}
+                                {{ row.usuario.nombre_usuario }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="modal-opinion" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2 class="titulo-modal">Opinión</h2>
+            </div>
+            <div class="modal-body">
+                <p class="contenido"></p>
+            </div>
         </div>
     </div>
 {% endblock %}
 {% block footer %}
-    <script type="text/javascript">
-        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    </script>
-    <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/ver.js') }}"></script>
 {% endblock %}

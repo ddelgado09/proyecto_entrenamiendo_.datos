@@ -1,6 +1,6 @@
 import os, json
 from datetime import datetime
-from flask import render_template, session, redirect, url_for, flash, jsonify
+from flask import render_template, session, redirect, url_for, flash, jsonify, request
 from flask_login import login_required
 from .forms import CargarArchivoForm
 from . import main
@@ -35,17 +35,23 @@ def cargar():
 @main.route('/ver')
 @login_required
 def ver():
-    data = Opinion.query.all()
-    return render_template('ver.html', data=data)
+    data = None
+    if not request.script_root:
+        request.script_root = url_for('main.index', _external=True)
 
-@main.route('/ver_datos/<tabla>', methods=['GET', 'POST'])
+    opiniones = Opinion.query.order_by(Opinion.idopinion.asc()).all()
+    estudiantes = Students.query.order_by(Students.numero.asc()).all()
+    procesamientos = Procesamientos.query.order_by(Procesamientos.id_procesamiento.asc()).all()
+    evaluador = Evaluador.query.order_by(Evaluador.idevaluador.asc()).all()
+
+    return render_template('ver.html', 
+        opiniones=opiniones, 
+        estudiantes=estudiantes, 
+        procesamientos=procesamientos, 
+        evaluador=evaluador
+        )
+
+@main.route('/ver_datos/<tabla>')
 @login_required
 def ver_datos(tabla):
-    if tabla == 'opiniones':
-        data = Opinion.query.all()
-    elif tabla == 'evaluador':
-        data = Evaluador.query.all()
-    elif tabla == 'procesamiento':
-        data = Procesamientos.query.all()
-
-    return data
+    pass
